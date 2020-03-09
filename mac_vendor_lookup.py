@@ -33,7 +33,7 @@ class AsyncMacLookup(BaseMacLookup):
 
     async def update_vendors(self, url=OUI_URL):
         logging.log(logging.INFO, "Downloading MAC vendor list")
-        async with aiohttp.ClientSession() as session:
+        async with aiohttp.ClientSession(trust_env=True) as session:
             async with session.get(url) as response:
                 async with aiofiles.open(AsyncMacLookup.cache_path, mode='wb') as f:
                     while True:
